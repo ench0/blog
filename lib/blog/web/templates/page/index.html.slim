@@ -1,0 +1,16 @@
+.posts
+  =for post <- @posts do
+    -[title, body, slug, image, tags] = post
+    .post
+      =if image do
+        img.thumb src="#{Blog.ImageUploader.url({image.image, image}, :thumb, signed: true)}" title="#{image.name}"
+      h2 =title
+      . =raw body
+      span = "Tags: "<>tags
+      span.more =link "more", to: post_path @conn, :show, slug
+
+
+/     =post
+/     / img.normal src="#{Blog.ImageUploader.url({post.image, post}, :normal, signed: true)}" title="#{post.image.name}"
+/     . =raw(Blog.ParsingHelper.truncate(post.body, max_length: 300, omission: "..."))
+/     

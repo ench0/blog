@@ -1,0 +1,10 @@
+.row.footer
+  .column
+    .tags
+      = link "[ tags ]", to: tag_path @conn, :index
+      =for tag <- Blog.Org.list_tags() do
+        =link tag.name, to: tag_path @conn, :show, tag.slug
+    . "[rendering] #{@durrend/1000} ms [query] #{@conn.assigns.dur/1000} ms [view] #{@view_module} [template] #{@view_template}"
+
+      |  | 
+      =link "Admin", to: admin_path @conn, :index  

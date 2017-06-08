@@ -1,0 +1,8 @@
+h1 Edit Page
+- new = false
+= render "form.html", changeset: @changeset, new: new, conn: @conn, page: @page,
+                        action: page_path(@conn, :update, @page)
+
+.infopost
+  span.circle i
+  span.right= link "Back", to: page_path(@conn, :index)

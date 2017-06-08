@@ -1,0 +1,9 @@
+h1 Edit Image
+-new = false
+= render "form.html", changeset: @changeset, post_id: @post_id, page_id: @page_id, new: new, image: @image,
+                        action: image_path(@conn, :update, @image)
+
+.infopost
+  span.circle i
+  span.right= link "Back", to: image_path(@conn, :index)
+  span.right= link "Delete", to: image_path(@conn, :delete, @image), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs"

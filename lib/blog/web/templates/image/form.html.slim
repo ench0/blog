@@ -1,0 +1,33 @@
+=form_for @changeset, @action, [multipart: true, class: "ui form"], fn f ->
+  =if @changeset.action do
+    .alert.alert-danger
+      p Oops, something went wrong! Please check the errors below.
+  
+  =if !@new do
+    eex:
+      <img src="<%= Blog.ImageUploader.url({@image.image, @image}, :thumb, signed: true)%>" title="<%= @image.name %>" />
+
+  .form-group
+    =label f, :image, class: "control-label"
+    =file_input f, :image, class: "form-control"
+    / , multiple: "multiple"
+    =error_tag f, :image
+
+  .form-group
+    =label f, :name, class: "control-label"
+    =text_input f, :name, class: "form-control"
+    =error_tag f, :name
+
+  / - if @post_id != "" do id=@post_id else id = @page_id end
+  .form-group
+    =label f, :post_id
+    =text_input f, :post_id, value: @post_id, class: "form-control"
+    =error_tag f, :post_id
+
+  .form-group
+    =label f, :page_id
+    =text_input f, :page_id, value: @page_id, class: "form-control"
+    =error_tag f, :page_id
+
+  .form-group
+    =submit "Submit", class: "btn btn-primary"

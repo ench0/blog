@@ -1,0 +1,36 @@
+-pages = Blog.Base.list_pages()
+
+nav#menu
+  ul
+    li.logo= link "[ e ]", to: page_path @conn, :index
+
+    / li.active
+    /   a href='#' Products
+    li.posts= link "Posts", to: post_path @conn, :index
+    / li.tags= link "Tags", to: tag_path @conn, :index
+    li.images= link "Images", to: image_path @conn, :index
+    / li= link "Forms", to: form_path @conn, :index
+
+    =for page <- pages do
+      =if page.menu do
+        eex:
+          <li class="<%=page.slug%>"><%=link page.title, to: page_path(@conn, :show, page.slug)%></li>
+          <%= if @conn.request_path ==  "/"<>page.slug do %>
+            <script>$("li.<%=page.slug%>").addClass("active");</script>
+          <% end %>
+
+=if @view_module == Elixir.Blog.Web.PageView && @view_template == "index.html" do
+  javascript:
+    $("li.logo").addClass("active");
+
+=if @view_module == Elixir.Blog.Web.PostView do
+  javascript:
+    $("li.posts").addClass("active");
+
+=if @view_module == Elixir.Blog.Web.ImageView do
+  javascript:
+    $("li.images").addClass("active");
+
+/ =if @view_module == Elixir.Blog.Web.TagView do
+/   javascript:
+/     $(".tags").addClass("active");

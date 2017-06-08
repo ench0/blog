@@ -1,0 +1,6 @@
+h1 New Image
+-new = true
+= render "form.html", changeset: @changeset, post_id: @post_id, page_id: @page_id, new: new,
+                        action: image_path(@conn, :create, "post_id": @post_id, "page_id": @page_id)
+
+span= link "Back", to: image_path(@conn, :index)

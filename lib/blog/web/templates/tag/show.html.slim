@@ -1,0 +1,23 @@
+h1 Tag: #{@tag.name}
+
+=link "Permalink", to: tag_path(@conn, :show, @tag.slug)
+. status:
+  |  
+  =if @tag.active do "active" else "inactive" end
+
+
+.posts
+  =for post <- @posts do
+    -[title, body, slug, image, date] = post
+    .post
+      =if image do
+        img.thumb src="#{Blog.ImageUploader.url({image.image, image}, :thumb, signed: true)}" title="#{image.name}"
+      h2 =title
+      . =raw body
+      span.infopost.list #{Timex.format!(date, "%e %b %Y", :strftime)} | #{Timex.from_now(date)}
+      span.more =link "more", to: post_path @conn, :show, slug
+
+.infopost
+  span.circle i
+  span.right=link "Back", to: tag_path(@conn, :index)
+  span.right=link "Edit", to: tag_path(@conn, :edit, @tag)

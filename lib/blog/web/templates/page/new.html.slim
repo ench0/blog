@@ -1,0 +1,6 @@
+h1 New Page
+- new = true
+= render "form.html", changeset: @changeset, new: new, params: @params, conn: @conn,
+                        action: page_path(@conn, :create)
+
+= link "Back", to: page_path(@conn, :index)

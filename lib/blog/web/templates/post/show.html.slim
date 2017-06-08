@@ -1,0 +1,68 @@
+-if Enum.count(@post.images) > 1 do [head | tail] = @post.images else head = Enum.at(@post.images, 0); body = @body end
+-if Enum.count(@post.images) == 0 do head = nil end
+
+/ -IO.inspect @conn.assigns
+-IO.inspect Enum.count(@post.images)
+/ -count = Enum.count tail
+
+- if tail do
+  - if Enum.at(tail, 0) do
+    -img0 = Blog.ImageUploader.url({Enum.at(tail, 0).image, Enum.at(tail, 0)}, :thumb, signed: true)
+    -body = String.replace(@body, "[img]", "<span class=\"img-cont\"><img class=\"cap\" src=\"#{img0}\" title=\"#{Enum.at(tail, 0).name}\"></span>", global: false)
+  - if Enum.at(tail, 1) do
+    -img1 = Blog.ImageUploader.url({Enum.at(tail, 1).image, Enum.at(tail, 1)}, :thumb, signed: true)
+    -body = String.replace(body, "[img]", "<span class=\"img-cont\"><img class=\"cap\" src=\"#{img1}\" title=\"#{Enum.at(tail, 1).name}\"></span>", global: false)
+  - if Enum.at(tail, 2) do
+    -img2 = Blog.ImageUploader.url({Enum.at(tail, 2).image, Enum.at(tail, 2)}, :thumb, signed: true)
+    -body = String.replace(body, "[img]", "<span class=\"img-cont\"><img class=\"cap\" src=\"#{img2}\" title=\"#{Enum.at(tail, 2).name}\"></span>", global: false)
+  - if Enum.at(tail, 3) do
+    -img3 = Blog.ImageUploader.url({Enum.at(tail, 3).image, Enum.at(tail, 3)}, :thumb, signed: true)
+    -body = String.replace(body, "[img]", "<span class=\"img-cont\"><img class=\"cap\" src=\"#{img3}\" title=\"#{Enum.at(tail, 3).name}\"></span>", global: false)
+  - if Enum.at(tail, 4) do
+    -img4 = Blog.ImageUploader.url({Enum.at(tail, 4).image, Enum.at(tail, 4)}, :thumb, signed: true)
+    -body = String.replace(body, "[img]", "<span class=\"img-cont\"><img class=\"cap\" src=\"#{img4}\" title=\"#{Enum.at(tail, 4).name}\"></span>", global: false)
+
+-body = String.replace(body, "[img]", "")
+
+
+=if head do
+  img.normal src="#{Blog.ImageUploader.url({head.image, head}, :normal, signed: true)}" title="#{head.name}"
+h1 = @post.title
+.infopost
+  span.circle d
+  span #{Timex.format!(@post.inserted_at, "%e %b %Y", :strftime)} | #{Timex.from_now(@post.inserted_at)}
+  span.circle r
+  span #{@readtime} read
+
+
+.intro= raw(@intro)
+
+/ if no [img] tags
+= if !String.contains? @body, "[img]" do
+  =if tail do
+    =for image <- tail do
+      .img-inline
+        img src="#{Blog.ImageUploader.url({image.image, image}, :thumb, signed: true)}" title="#{image.name}" class="cap"
+
+.body= raw(body)
+
+.infopost.margin-top
+  span.circle u
+  span =link "posts/#{@post.slug}", to: post_path(@conn, :show, @post.slug)
+    
+  span.circle s
+  span =if @post.active do "active" else "inactive" end
+    
+  span.circle ";"
+  span
+    =for tag <- @post.tags do
+      =link tag.name, to: tag_path @conn, :show, tag.slug
+      / | &nbsp;
+
+  span.right=link "Back", to: post_path(@conn, :index)
+  span.right=link "Edit", to: post_path(@conn, :edit, @post)
+
+javascript:
+  $('.cap').each(function() {
+      $(this).after( "<span class='caption'>" + $(this).attr('title') + "</span>" ); 
+  });

@@ -1,0 +1,12 @@
+h1 Posts
+
+.posts
+  =for post <- @posts do
+    -[title, body, slug, image, tags] = post
+    .post
+      =if image do
+        img.thumb src="#{Blog.ImageUploader.url({image.image, image}, :thumb, signed: true)}" title="#{image.name}"
+      h2 =title
+      . =raw body
+      span = "Tags: "<>tags
+      span.more =link "more", to: post_path @conn, :show, slug

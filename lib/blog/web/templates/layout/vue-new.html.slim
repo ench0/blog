@@ -1,0 +1,47 @@
+    javascript:
+      new Vue({
+        el: '#naslov',
+        data: {
+          title: "",
+        },
+        computed: {
+          slug: function() {
+            var slug = this.sanitizeTitle(this.title);
+            return slug;
+          }
+        },
+        methods: {
+          sanitizeTitle: function(title) {
+            var slug = "";
+            // Change to lower case
+            var titleLower = title.toLowerCase();
+            // Letter "e"
+            slug = titleLower.replace(/e|é|è|ẽ|ẻ|ẹ|ê|ế|ề|ễ|ể|ệ/gi, 'e');
+            // Letter "a"
+            slug = slug.replace(/a|á|à|ã|ả|ạ|ă|ắ|ằ|ẵ|ẳ|ặ|â|ấ|ầ|ẫ|ẩ|ậ/gi, 'a');
+            // Letter "o"
+            slug = slug.replace(/o|ó|ò|õ|ỏ|ọ|ô|ố|ồ|ỗ|ổ|ộ|ơ|ớ|ờ|ỡ|ở|ợ/gi, 'o');
+            // Letter "c"
+            slug = slug.replace(/c|Č|ć|Ć|ć/gi, 'c');
+            // Letter "s"
+            slug = slug.replace(/s|Š|š/gi, 's');
+            // Letter "z"
+            slug = slug.replace(/z|Ž|ž/gi, 'z');
+            // Letter "d"
+            slug = slug.replace(/d|Đ|đ/gi, 'd');
+            // special to nothing
+            slug = slug.replace(/\||\*|#|¢|\ˆ|€|¡|§|¶|\¨|ª|º|\"|\\|\'|:|;|,|\?|<|>|`/gi, '');
+            // special to dash
+            slug = slug.replace(/_|\-\-|\+/gi, '-');
+            // Trim the last whitespace
+            slug = slug.replace(/\s*$/g, '');
+            // Change whitespace to "-"
+            slug = slug.replace(/\s+/g, '-');
+            // Change multiple dashed to single
+            slug = slug.replace(/\-+/g, '-');
+            
+            
+            return slug;
+          }
+        }
+      });

@@ -1,0 +1,7 @@
+.row.banner
+  .column
+    .about
+      h3 
+      span=raw @about
+        = link "[ more ]", to: page_path @conn, :show, "about"
+

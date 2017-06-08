@@ -1,0 +1,26 @@
+h1 Listing Posts
+=link "Admin", to: admin_path(@conn, :index)
+
+table
+  thead
+    tr
+      th Title
+      th Slug
+      th Active
+      th
+
+    tbody
+
+      =for post <- @posts do
+        tr
+          td= post.title
+          td= post.slug
+          td= post.active
+
+          td class="text-right"
+            span=link "Show", to: post_path(@conn, :show, post.slug), class: "btn btn-default btn-xs"
+            span=link "Edit", to: post_path(@conn, :edit, post), class: "btn btn-default btn-xs"
+            span=link "Delete", to: post_path(@conn, :delete, post), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs"
+
+
+span=link "New Post", to: post_path(@conn, :new)

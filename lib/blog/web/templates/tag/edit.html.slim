@@ -1,0 +1,6 @@
+h1 Edit Tag
+
+=render "form.html", changeset: @changeset,
+                        action: tag_path(@conn, :update, @tag)
+
+span=link "Back", to: tag_path(@conn, :index)

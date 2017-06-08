@@ -1,0 +1,29 @@
+h1 Listing images
+=link "Admin", to: admin_path(@conn, :index)
+
+table
+  thead
+    tr
+      th Image
+      th Name
+      th Post ID
+      th Page ID
+      th
+
+    tbody
+
+      =for image <- @images do
+        tr
+          td
+            img.mini src="#{Blog.ImageUploader.url({image.image, image}, :thumb, signed: true)}" title="#{image.name}"
+          td= image.name
+          td= image.post_id
+          td= image.page_id
+
+          td class="text-right"
+            span=link "Show", to: image_path(@conn, :show, image), class: "btn btn-default btn-xs"
+            span=link "Edit", to: image_path(@conn, :edit, image), class: "btn btn-default btn-xs"
+            span=link "Delete", to: image_path(@conn, :delete, image), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs"
+
+
+span=link "New image", to: image_path(@conn, :new)

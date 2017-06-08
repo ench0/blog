@@ -1,0 +1,256 @@
+/*
+ * -- BASE STYLES --
+ * Most of these are inherited from Base, but I want to change a few.
+ */
+body
+  line-height: 1.7em
+  color: $letter-color
+  font-size: 16px
+  /*font-family:  'Open Sans Condensed',"Lucida Grande", 'Helvetica Neue',Arial,Helvetica,sans-serif*/
+  // font-family:  'Open Sans',"Lucida Grande", 'Helvetica Neue',Arial,Helvetica,sans-serif
+  font-weight: 300
+  margin: 0
+  // position: relative
+
+h1,h2,h3,h4,h5,h6,label 
+  color: $letter-color
+h1
+  margin: .5em 0 .5em 0
+h2,h3,h4,h5,h6
+  margin: 2rem 0 1.5rem 0
+a 
+  color: $primary-color
+ul 
+  list-style: outside circle
+  margin-left: 2em
+strong 
+  font-weight: 500
+
+/*STRUCTURE*/
+section.main 
+  width: 100%
+  margin: 0 auto
+  padding: 4em 1em 2em 1em
+  max-width: 700px
+  top: 4em
+section.main.home 
+  padding: 1em 1em 2em 1em
+.content p, .content div
+  text-align: justify
+footer 
+  background: $primary-color-a
+  position: fixed
+  bottom: 0
+  color: #fff
+  width: 100%
+  text-align: center
+  font-size: 75%
+footer a, footer a:hover, .footer a
+  color: #fff
+  font-weight: 300
+.footer a:hover
+  color: $letter-color
+.banner, .footer
+  background: $primary-color-a
+.banner
+  margin-top: 3em
+  padding: 1em 3em 1em
+.footer
+  text-align: center
+  font-size: 75%
+  padding: .5em
+  line-height: 200%
+
+/*CONTENT*/
+.intro
+  border-left: 1px solid $primary-color-a-l
+  padding-left: 1em
+  margin-bottom: 1em
+.intro p, .body p
+  text-align: justify
+  margin: .5em 0
+.intro p
+  margin: 0
+.posts p
+  margin: 0 0 .5em 0
+  text-align: justify
+.post
+  border-bottom: 4px solid $primary-color-a-l
+  padding-bottom: 1em
+  margin-bottom: 1em
+.more
+  float: right
+.tags a
+  display: inline-block
+  margin-right: 1em
+  font-size: 2em
+.about div
+  display: inline
+.about p
+  text-align: justify
+  display: inline
+.about a
+  display: inline-block
+  margin-left: 1em
+  color: $letter-color
+.infopost
+  font-size: 80%
+  border-top: 1px solid $primary-color-a-l
+  border-bottom: 1px solid $primary-color-a-l
+  padding: .5em
+  margin-bottom: 2em
+  color: $letter-color-l
+  line-height: 120%
+.infopost span
+  display: inline-block
+  margin-right: 1em
+.infopost.list
+  border: none
+.right
+  float: right
+.circle
+  border: 1px solid $primary-color-a-l
+  border-radius: 1em
+  margin-top: -2px
+  margin-bottom: -2px
+  padding: 2px
+  width: 18px
+  height: 18px
+  text-align: center
+  font-family: Courier New, Courier, monospace
+  font-weight: 700
+  font-size: 12px
+  color: $primary-color-a
+.margin-top
+  margin-top: 4em
+
+/*FORM*/
+input, textarea, select, button 
+  font-size: 1em
+  font-weight: 300
+  margin: 0
+label 
+  font-weight: 500
+  margin-top: .5em
+.form-group 
+  padding: .25em 0
+button, .button
+  background: $primary-color
+  font-size: 1em
+  font-weight: 300
+  border: none
+  // margin-right: .5em
+.button.positive
+  background: $positive-color
+.button.primary
+  background: $primary-color
+.button.negative
+  background: $negative-color
+form.link
+  display: inline
+.help-block 
+  color: $negative-color
+  font-weight: 700
+
+
+
+// INFO
+aside
+  background: $info-color
+  color: #fff
+  padding: 1em
+  border-radius: .5em
+  margin: 1em auto
+aside:empty 
+  display: none
+aside.info 
+  background: $info-color
+aside.error, aside.alert 
+  background: $error-color
+
+
+// IMAGES
+img.normal
+  width: 100%
+img.thumb
+  width: 250px
+.posts img.thumb
+  width: 150px
+  float: left
+  display: inline-block
+  margin: 0
+  padding: 0
+  margin-right: 1em
+.img-cont
+  position: relative
+  margin: 0 0 0 1em
+  padding: 0
+  width: 250px
+  height: 250px
+  float: right
+  z-index: 1
+img.mini
+  width: 50px
+.img-inline
+  position: relative
+  width: 202px
+  height: 202px
+  margin-right: 20px
+  float: left
+.caption
+  position: absolute
+  display: block
+  bottom: 0
+  background: rgba(0,0,0,0.5)
+  color: white
+  padding: .25em
+  width: 100%
+.card-cont
+  padding: 0
+  margin: 0
+  list-style: none
+  
+  display: -webkit-box
+  display: -moz-box
+  display: -ms-flexbox
+  display: -webkit-flex
+  display: flex
+  
+  -webkit-flex-flow: row wrap
+  flex-flow: row wrap
+  justify-content: space-around
+.card
+  background: tomato
+  padding: 10px
+  width: 210px
+  // height: 500px
+  margin-top: 10px
+  
+  // line-height: 150px
+  color: white
+  font-weight: bold
+  font-size: .8em
+  text-align: center
+
+
+@media all and (max-width: 800px), only screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: 1024px), only screen and (min--moz-device-pixel-ratio: 2) and (max-width: 1024px), only screen and (-o-min-device-pixel-ratio: 2/1) and (max-width: 1024px), only screen and (min-device-pixel-ratio: 2) and (max-width: 1024px), only screen and (min-resolution: 192dpi) and (max-width: 1024px), only screen and (min-resolution: 2dppx) and (max-width: 1024px)
+  .img-cont
+    width: 100%
+    height: auto
+    line-height: 2em
+  .img-cont img
+    width: 100%
+    line-height: 2em
+    height: auto
+  .img-inline
+    position: relative
+    width: 44%
+    height: auto
+    margin-right: 0
+    margin-left: 7%
+    float: right
+  .caption
+    margin-bottom: 10px
+  .banner
+    margin-top: 2.6em
+

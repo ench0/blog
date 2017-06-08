@@ -1,0 +1,10 @@
+h1 Listing Tags
+
+div.tags
+  =for tag <- @tags do
+    =link "[ #{tag.name} ]", to: tag_path(@conn, :show, tag.slug)
+
+p
+.infopost
+  span.circle i
+  span.right=link "New Tag", to: tag_path(@conn, :new)

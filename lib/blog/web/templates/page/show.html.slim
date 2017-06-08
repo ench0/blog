@@ -1,0 +1,17 @@
+=for image <- @page.images do
+  img.normal src="#{Blog.ImageUploader.url({image.image, image}, :normal, signed: true)}" title="#{image.name}"
+
+h1 = @page.title
+
+.intro= raw(@intro)
+/ = if tail do
+/   = for slika <- tail do
+/     .pure-u-1
+/       img src="<%= Elasr.SlikaUploader.url({slika.slika, slika}, :normal, signed: true)%>" title="<%= slika.ime %>" class="slika2 pure-img-responsive"
+
+.body= raw(@body)
+
+.infopost
+  span.circle i
+  span.right=link "Back", to: page_path(@conn, :index)
+  span.right=link "Edit", to: page_path(@conn, :edit, @page)

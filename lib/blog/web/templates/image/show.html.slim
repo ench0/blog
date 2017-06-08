@@ -1,0 +1,9 @@
+h2="Image #{@image.name}"
+
+eex:
+  <img src="<%= Blog.ImageUploader.url({@image.image, @image}, :thumb, signed: true)%>" title="<%= @image.name %>" />
+
+.infopost
+  span.circle i
+  span.right= link "Back", to: image_path(@conn, :index)
+  span.right= link "Edit", to: image_path(@conn, :edit, @image)

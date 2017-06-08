@@ -1,0 +1,7 @@
+h1 Edit Post
+- new = false
+=render "form.html", changeset: @changeset, tags: @tags, new: new, conn: @conn, post: @post,
+                        action: post_path(@conn, :update, @post)
+.infopost
+  span.circle i
+  span.right=link "Back", to: post_path(@conn, :index)

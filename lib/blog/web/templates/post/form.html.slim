@@ -1,0 +1,119 @@
+=form_for @changeset, @action, [multipart: true, class: "ui form"], fn f ->
+  =if @changeset.action do
+    aside.alert
+      span Oops, something went wrong! Please check the errors below.
+  
+  
+  #title.form-group
+    = label f, :title, class: "control-label"
+    = text_input f, :title, class: "form-control", v_model: "title"
+    = error_tag f, :title
+    div
+      = label f, :slug, class: "control-label"
+      = text_input f, :slug, class: "form-control", v_model: "slug"
+      = error_tag f, :slug
+
+  .form-group
+    =label f, :body, class: "control-label"
+    =textarea f, :body, class: "form-control", id: "editor", rows: "5"
+    =error_tag f, :body
+
+  .form-group
+    =label f, :tags, class: "control-label"
+    =text_input f, :tags, class: "form-control", value: @tags
+    =error_tag f, :tags
+
+  .form-group
+    =label f, :active, class: "control-label"
+    =checkbox f, :active, class: "checkbox"
+    =error_tag f, :active
+
+
+  = if !@new do
+    h2 Images
+    ul.card-cont
+      = inputs_for f, :images, fn i ->
+        li.card #{i.data.name}
+          / .header.center= i.index+1
+          .description
+            =link to: image_path(@conn, :edit, i.data) do
+              img.thumb src="#{Blog.ImageUploader.url({i.data.image, i.data}, :thumb, signed: true)}" title="#{i.data.name}"
+            / = label i, :name
+            = text_input i, :name, placeholder: "Name", class: "pure-u-1"
+            = error_tag i, :name
+            -class = "inputfile inputfile-"<>Integer.to_string(i.index+1)
+            = file_input i, :image, placeholder: "Choose image", class: class, data_multiple_caption: "{count} files selected", class: "pure-u-1"
+            = error_tag i, :image
+            =number_input i, :order
+            = error_tag i, :order
+
+            / = link to: image_path(@conn, :delete, i.data.id), method: :delete, data: [confirm: "Are you sure?"], class: "ui bottom attached button", data_content: "Delete" do
+              / <i class="red icon remove"></i>
+              / <span>Izbriši sliku&hellip;</span>
+
+
+    = link "New image", to: image_path(@conn, :new, "post_id": @post.id, "page_id": ""), class: "button", data_content: "Prikaži"
+
+
+  .form-group
+    =submit "Submit", class: "btn btn-primary"
+
+
+
+= if @new do
+  javascript:
+    vue = new Vue({
+      el: '#title',
+      data: {
+        title: "",
+      },
+      computed: {
+        slug: function() {
+          var slug = this.sanitizeTitle(this.title);
+          return slug;
+        }
+      },
+      methods: {
+        sanitizeTitle: function(title) {
+          var slug = "";
+          // Change to lower case
+          var titleLower = title.toLowerCase();
+          // Letter "e"
+          slug = titleLower.replace(/e|é|è|ẽ|ẻ|ẹ|ê|ế|ề|ễ|ể|ệ/gi, 'e');
+          // Letter "a"
+          slug = slug.replace(/a|á|à|ã|ả|ạ|ă|ắ|ằ|ẵ|ẳ|ặ|â|ấ|ầ|ẫ|ẩ|ậ/gi, 'a');
+          // Letter "o"
+          slug = slug.replace(/o|ó|ò|õ|ỏ|ọ|ô|ố|ồ|ỗ|ổ|ộ|ơ|ớ|ờ|ỡ|ở|ợ/gi, 'o');
+          // Letter "c"
+          slug = slug.replace(/c|Č|ć|Ć|ć/gi, 'c');
+          // Letter "s"
+          slug = slug.replace(/s|Š|š/gi, 's');
+          // Letter "z"
+          slug = slug.replace(/z|Ž|ž/gi, 'z');
+          // Letter "d"
+          slug = slug.replace(/d|Đ|đ/gi, 'd');
+          // special to nothing
+          slug = slug.replace(/\||\*|#|¢|\ˆ|€|¡|§|¶|\¨|ª|º|\"|\\|\'|:|;|,|\?|<|>|`/gi, '');
+          // special to dash
+          slug = slug.replace(/_|\-\-|\+/gi, '-');
+          // Trim the last whitespace
+          slug = slug.replace(/\s*$/g, '');
+          // Change whitespace to "-"
+          slug = slug.replace(/\s+/g, '-');
+          // Change multiple dashed to single
+          slug = slug.replace(/\-+/g, '-');
+          
+          
+          return slug;
+        }
+      }
+    });
+
+eex:
+  <%= if @new do %>
+    <script>vue.title = '<%= @params["title"] %>'</script>
+  <% end %>
+  <link rel="stylesheet" href="<%= static_path(@conn, "/css/trumbowyg.min.css") %>">
+  <script src="<%= static_path(@conn, "/js/jquery.min.js") %>"></script>
+  <script src="<%= static_path(@conn, "/js/trumbowyg.min.js") %>"></script>
+  <script src="<%= static_path(@conn, "/js/script-trumb.js") %>"></script>

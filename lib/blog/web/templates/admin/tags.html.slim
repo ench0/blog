@@ -1,0 +1,26 @@
+h1 Listing tags
+=link "Admin", to: admin_path(@conn, :index)
+
+table
+  thead
+    tr
+      th Name
+      th Slug
+      th Active
+      th
+
+    tbody
+
+      =for tag <- @tags do
+        tr
+          td= tag.name
+          td= tag.slug
+          td= tag.active
+
+          td class="text-right"
+            span=link "Show", to: tag_path(@conn, :show, tag.slug), class: "btn btn-default btn-xs"
+            span=link "Edit", to: tag_path(@conn, :edit, tag), class: "btn btn-default btn-xs"
+            span=link "Delete", to: tag_path(@conn, :delete, tag), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs"
+
+
+span=link "New tag", to: tag_path(@conn, :new)
