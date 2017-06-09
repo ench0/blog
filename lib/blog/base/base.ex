@@ -31,7 +31,9 @@ defmodule Blog.Base do
     #     x
     #   end
     # end)
-    posts = Repo.all(Post) |> Repo.preload [:images, :tags]
+
+    query = from p in Post, where: [active: true], order_by: [desc: :inserted_at]
+    posts = Repo.all(query) |> Repo.preload [:images, :tags]
     posts = Enum.map posts, fn(x) ->
       if x.active do
         [x.title,
