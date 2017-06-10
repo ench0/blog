@@ -46,6 +46,9 @@ h1 = @post.title
 
 .body= raw(body)
 
+=for file <- @post.files do
+  =link file.name, to: Blog.FileUploader.url({file.file, file}, :thumb, signed: true)
+
 .infopost.margin-top
   span.circle u
   span =link "posts/#{@post.slug}", to: post_path(@conn, :show, @post.slug)

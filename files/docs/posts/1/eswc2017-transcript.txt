@@ -1,0 +1,45 @@
+Utilising Semantic Web Ontologies to Publish Experimental Workflows, Ensar Hadziselimovic
+
+The main author is Harsh, but he couldn't be here today. We are PhD candidates in the early stages, looking at semantic web and linked data. Both of us come from similar backgrounds. Web developers, me for the last ten years or so. The interesting thing is we had all scales of projects but we didn't find anything about semantic web before we started our studies. So that tells you a bit about how exposed we are outside of scientific circles.
+
+When we started originally, at the ADAPT Centre in Dublin. Four big universities. Loads of stuff going on, 115 researchers, 80 industry partners, big companies. Huge number of papers. We specialise in NLP, ML. We were lucky enough to participate in a semweb workshop which opened our eyes to where we want to head with our studies. Harsh looks at ontologies, I look at legal stuff. It became obvious from the beginning that there is a problem with how papers and experiments are presented in an institution. There's no central point between our four universities for gathering data. Why not use SemWeb to make it more decentralised? Started locally but realised there's an issue in the scientific community as a whole. A huge number of publishing methods available, but no consistency when it comes to publishing something related to the paper, such as workflows. Not well represented in classic publishing methods. Also huge diversity. People use github, docker, VMs, no consistency. Why not use SemWeb and LD to try to find some kind of link between the experimental workflows?
+
+We want authors to be in control of their own knowledge. But there are obstacles. We conducted some research in the scientific community. People are really unaware of semweb in our university. We should educate the scientific community in the possibilities.
+
+To go over the experimental workflows: reproducibility and repeatability. Common sense when it comes to publishing experiments. No option to reproduce someone else's results and change parameters etc. All of this leads to how we can reproduce an experiment. There are a whole number of difficulties. You inherit certain properties of an experiment and you have to be aware of that, and which parts you can use freely when it comes to licensing. Licensing, IP, is a very big issue when it comes to reproducing experiments.
+
+Ontologies: OPMW (http://www.opmw.org/model/OPMW/) based on PROV-O and P-Plan. It enables us to track provenance inside scientific workflows.
+
+Second part is legal stuff: ODRL (https://www.w3.org/ns'odrl/2/ODRL21) for digital rights management, to describe privacy etc.
+
+We can see a typical workflow in OPMW, different concepts of the data.
+
+ODRL contains classes, properties and actions to do with licensing and attribution, and what things can be used for.
+
+One interesting approach on ODRL is that it works on a principle of inclusivity. If you take a typical file system you can get certain permissions. Subfolders inherit them. That works in principle by exclusion. ODRL is different. The child experiment is derived from .. it has certain concepts as many as you like. All of these concepts can have properties. Dealing with inheritance with inheritAllowed and inheritFrom. On the parents side we see all of these properties, describing if the property can be passed for inheritance to the child.
+
+OPMW also has related concepts.
+
+Our tool - a web application build with certain values in mind. It has three tasks for users who have different levels of familiarity with workflows, or with linked data / semantic web concepts, or neither. So by using the tool they can be educated about the things they are unfamiliar with. The tool is a work in progress, and is for educating our own staff so they can understand how linked data is useful for them. They are experts in their field, but they have a gap when it comes to linked data. The tool generates documentation about your experimental workflow once you've entered the steps.
+
+We have some remaining challenges regarding how to describe different concepts, different types of experiments. PROV may not be sufficient for tracking what we need; mixing it with ODRL has some drawbacks. Licensing is a multidimensional problem. No clear guidelines for licensing experimental workflows. Many people publish experiments without any license, which is considered the worst case in legal circles.
+
+Future work is the user study. We are trying to discover how people are familiar with linked data and the legal issues to do with publishing. It is surprising how much the general computer science community is not aware of these technologies, so we need more participants, more people involved. We are trying to recruit people who can help with promoting this. We see this as a way into the future.
+
+We focus at the moment on workflows but we can expand this further.
+
+Code will be available after the conference!
+
+Q/A
+
+??: Trying to derive benefit from PROV-O in scientific workflows.. documenting execution traces for end users and especially when you want to link to domain concepts. PROV is very technical. PROV traces can be huge in size.
+
+E: Have you looked at OPMW? It extends P-Plan and PROV to do more to do experimental workflows. Even with that we're still not 100% happy. We're trying to tackle the legal side in parallel, it's very difficult to combine those two. Before I forget, it could be our opportunity to push this thing further. We have a GDPR in one years' time. In parallel we're doing consent-driven framework in relation to GDPR, it might be a big opportunity because many companies are starting to be aware that their data is not legally proper at the moment. GDPR is very specific that all the data that you have available in portable formats so anyone has to be able to port the data to other services, which is a very vague defined.
+
+SK: Re licensing.. I'm part of the Permission Obligation Expressions group. Standardising ODRL. We're representing common licensing like CC-BY CC-BY-SA, any licenses. So we're looking to formally represent them so we can reason over them. When it comes to derivative work more than likely you're using components and they come with different licenses, so what license do you give the thing you're actually developing. Is this something that you're doing?
+
+E: Definitely going to head in that direction.
+
+SK: How do you license data? It's a really difficult problem
+
+E: No insights yet. That's a direction I want to head. When you talk about open data, how you can attach the license itself. You can find licensing guidelines all over the place, but there is no place that you can see how actually people do it in practice. I also see this workflow like Ruben/s earlier, we tried to develop something similar in our tool focused on workflows, but also we want to have some kind of licensing method attached to the RDF output we're producing.
