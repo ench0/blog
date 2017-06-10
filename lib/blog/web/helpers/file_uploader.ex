@@ -11,7 +11,7 @@ defmodule Blog.FileUploader do
 
   # Whitelist file extensions:
   def validate({file, _}) do
-    ~w(.txt .pdf .zip .doc .docx) |> Enum.member?(Path.extname(file.file_name))
+    ~w(.txt .pdf .zip .doc .docx .TXT .PDF .ZIP .DOC .DOCX) |> Enum.member?(Path.extname(file.file_name))
   end
 
   # Define a thumbnail transformation:

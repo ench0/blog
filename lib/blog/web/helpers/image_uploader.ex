@@ -9,7 +9,7 @@ defmodule Blog.ImageUploader do
 
   # Whitelist file extensions:
   def validate({file, _}) do
-    ~w(.jpg .jpeg .gif .png) |> Enum.member?(Path.extname(file.file_name))
+    ~w(.jpg .jpeg .gif .png .JPG .JPEG .GIF .PNG) |> Enum.member?(Path.extname(file.file_name))
   end
 
   # Define a thumbnail transformation:
@@ -31,7 +31,7 @@ defmodule Blog.ImageUploader do
   # end
 
   def filename(version, {file, scope}) do
-    filename = String.replace(file.file_name, ".jpg", "") |> String.replace(".png", "") |> String.replace(".jpeg", "")
+    filename = String.replace(file.file_name, ".jpg", "") |> String.replace(".jpeg", "") |> String.replace(".gif", "") |> String.replace(".png", "") |> String.replace(".JPG", "") |> String.replace(".JPEG", "") |> String.replace(".GIF", "") |> String.replace(".PNG", "")
     String.replace(Slugger.slugify_downcase("#{version}_#{filename}"), "allah", "Allah")
   end
 
