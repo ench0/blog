@@ -64,3 +64,5 @@ config :logger, level: :info
 #
 #     config :blog, Blog.Web.Endpoint, server: true
 #
+import_config "prod.secret.exs"
+

@@ -1,0 +1,9 @@
+h1 Edit File
+-new = false
+= render "form.html", changeset: @changeset, post_id: @post_id, page_id: @page_id, new: new, file: @file, conn: @conn,
+                        action: file_path(@conn, :update, @file)
+
+.infopost
+  span.circle i
+  span.right= link "Back", to: file_path(@conn, :index)
+  span.right= link "Delete", to: file_path(@conn, :delete, @file), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs"

@@ -1,0 +1,29 @@
+h1 Listing files
+=link "Admin", to: admin_path(@conn, :index)
+
+table
+  thead
+    tr
+      th File
+      th Name
+      th Post ID
+      th Page ID
+      th
+
+    tbody
+
+      =for file <- @files do
+        tr
+          td
+            img.mini src="#{Blog.ImageUploader.url({file.file, file}, :thumb, signed: true)}" title="#{file.name}"
+          td= file.name
+          td= file.post_id
+          td= file.page_id
+
+          td class="text-right"
+            span=link "Show", to: file_path(@conn, :show, file), class: "btn btn-default btn-xs"
+            span=link "Edit", to: file_path(@conn, :edit, file), class: "btn btn-default btn-xs"
+            span=link "Delete", to: file_path(@conn, :delete, file), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs"
+
+
+span=link "New file", to: file_path(@conn, :new)

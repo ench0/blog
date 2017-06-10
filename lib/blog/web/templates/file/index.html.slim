@@ -1,0 +1,5 @@
+h1 Files
+=for file <- @files do
+  tr
+    td
+      img.mini src="#{Blog.FileUploader.url({file.file, file}, :thumb, signed: true)}" title="#{file.name}"

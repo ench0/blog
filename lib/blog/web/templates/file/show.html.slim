@@ -1,0 +1,10 @@
+h2="File #{@file.name}"
+
+. =file= Blog.FileUploader.url({@file.file, @file}, :thumb, signed: true)
+
+. =link @file.name, to: file
+
+.infopost
+  span.circle i
+  span.right= link "Back", to: file_path(@conn, :index)
+  span.right= link "Edit", to: file_path(@conn, :edit, @file)

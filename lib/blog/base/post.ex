@@ -14,6 +14,7 @@ defmodule Blog.Base.Post do
 
     many_to_many :tags, Blog.Org.Tag, join_through: "post_tags", on_replace: :delete
     has_many :images, Blog.Comp.Image, on_replace: :delete
+    has_many :files, Blog.Comp.File, on_replace: :delete
 
     timestamps()
   end
@@ -25,6 +26,7 @@ defmodule Blog.Base.Post do
     |> cast(attrs, [:title, :slug, :body, :active])
     |> put_assoc(:tags, parse_tags(attrs))#posttag
     |> cast_assoc(:images)
+    |> cast_assoc(:files)
     # |> cast_assoc(:tags)
     |> validate_required([:title, :slug, :active])
     |> validate_length(:title, max: 250, message: "It has to be less than 250 characters")

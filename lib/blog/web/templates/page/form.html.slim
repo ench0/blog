@@ -48,6 +48,27 @@
 
     = link "New image", to: image_path(@conn, :new, "post_id": "", "page_id": @page.id), class: "card", data_content: "Prikaži"
 
+  = if !@new do
+    h2 Files
+    ul.card-cont
+      = inputs_for f, :files, fn i ->
+        li.card #{i.data.name}
+          / .header.center= i.index+1
+          .description
+            =link to: file_path(@conn, :edit, i.data) do
+              img.thumb src="#{Blog.ImageUploader.url({i.data.file, i.data}, :thumb, signed: true)}" title="#{i.data.name}"
+            / = label i, :name
+            = text_input i, :name, placeholder: "Name", class: "pure-u-1"
+            = error_tag i, :name
+            -class = "inputfile inputfile-"<>Integer.to_string(i.index+1)
+            = file_input i, :file, placeholder: "Choose file", class: class, data_multiple_caption: "{count} files selected", class: "pure-u-1"
+            = error_tag i, :file
+            =number_input i, :order
+            = error_tag i, :order
+
+
+    = link "New file", to: file_path(@conn, :new, "post_id": "", "page_id": @page.id), class: "button", data_content: "Prikaži"
+
 
   .form-group
     =submit "Submit", class: "btn btn-primary"

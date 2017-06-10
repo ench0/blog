@@ -37,6 +37,12 @@ defmodule Blog.Web.Router do
     resources "/", ImageController, only: [:index, :show]
   end
 
+  scope "/files", Blog.Web do
+    pipe_through :browser
+
+    resources "/", FileController, only: [:index, :show]
+  end
+
   scope "/admin", Blog.Web do
     pipe_through :browser
 
@@ -53,6 +59,9 @@ defmodule Blog.Web.Router do
 
     get "/images", AdminController, :images
     resources "/images", ImageController, except: [:index, :show]
+
+    get "/files", AdminController, :files
+    resources "/files", FileController, except: [:index, :show]
   end
 
 

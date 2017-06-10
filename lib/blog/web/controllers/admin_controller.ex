@@ -34,6 +34,11 @@ defmodule Blog.Web.AdminController do
     render(conn, "images.html", images: images)
   end
 
+  def files(conn, _params) do
+    files = Comp.list_files()
+    render(conn, "files.html", files: files)
+  end
+
   def path(conn, _params) do
     render(conn, Blog.Web.LayoutView, "404.html")
   end

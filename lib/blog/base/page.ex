@@ -14,6 +14,7 @@ defmodule Blog.Base.Page do
     field :menu, :integer, default: 0, null: false
 
     has_many :images, Blog.Comp.Image, on_replace: :delete
+    has_many :files, Blog.Comp.File, on_replace: :delete
 
     timestamps()
   end
@@ -23,6 +24,7 @@ defmodule Blog.Base.Page do
     page
     |> cast(attrs, [:title, :slug, :body, :active, :menu])
     |> cast_assoc(:images)
+    |> cast_assoc(:files)
     |> validate_required([:title, :slug, :body, :active, :menu])
   end
 end

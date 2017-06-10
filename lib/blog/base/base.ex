@@ -33,7 +33,7 @@ defmodule Blog.Base do
     # end)
 
     query = from p in Post, where: [active: true], order_by: [desc: :inserted_at]
-    posts = Repo.all(query) |> Repo.preload [:images, :tags]
+    posts = Repo.all(query) |> Repo.preload [:images, :files, :tags]
     posts = Enum.map posts, fn(x) ->
       if x.active do
         [x.title,
@@ -65,11 +65,11 @@ defmodule Blog.Base do
       ** (Ecto.NoResultsError)
 
   """
-  def get_post!(id), do: Repo.get!(Post, id) |> Repo.preload [:tags, :images]
+  def get_post!(id), do: Repo.get!(Post, id) |> Repo.preload [:tags, :images, :files]
   def get_post(id) do
-    if Blog.ParsingHelper.is_numeric(id), do: Repo.get(Post, id) |> Repo.preload([tags: (from t in Blog.Org.Tag, order_by: t.name), images: (from i in Blog.Comp.Image, order_by: i.order)])#Repo.preload [:tags, :images]
+    if Blog.ParsingHelper.is_numeric(id), do: Repo.get(Post, id) |> Repo.preload([tags: (from t in Blog.Org.Tag, order_by: t.name), images: (from i in Blog.Comp.Image, order_by: i.order), files: (from f in Blog.Comp.File, order_by: f.order)])#Repo.preload [:tags, :images]
   end
-  def get_post_by(slug), do: Repo.get_by(Post, slug: slug) |> Repo.preload([tags: (from t in Blog.Org.Tag, order_by: t.name), images: (from i in Blog.Comp.Image, order_by: i.order)])
+  def get_post_by(slug), do: Repo.get_by(Post, slug: slug) |> Repo.preload([tags: (from t in Blog.Org.Tag, order_by: t.name), images: (from i in Blog.Comp.Image, order_by: i.order), files: (from f in Blog.Comp.File, order_by: f.order)])
 
   @doc """
   Creates a post.
@@ -172,11 +172,11 @@ defmodule Blog.Base do
       ** (Ecto.NoResultsError)
 
   """
-  def get_page!(id), do: Repo.get!(Page, id) |> Repo.preload :images
+  def get_page!(id), do: Repo.get!(Page, id) |> Repo.preload [:images, :files]
   def get_page(id) do
-    if Blog.ParsingHelper.is_numeric(id), do: Repo.get(Page, id) |> Repo.preload :images
+    if Blog.ParsingHelper.is_numeric(id), do: Repo.get(Page, id) |> Repo.preload [:images, :files]
   end
-  def get_page_by(slug), do: Repo.get_by(Page, slug: slug) |> Repo.preload :images
+  def get_page_by(slug), do: Repo.get_by(Page, slug: slug) |> Repo.preload [:images, :files]
 
   @doc """
   Creates a page.

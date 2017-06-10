@@ -7,6 +7,7 @@ mix phx.gen.html Base Page pages title:string slug:string body:string active:boo
 
 mix phx.gen.html Comp Form forms title:string info:string active:boolean
 mix phx.gen.html Comp Image images image:string name:string post_id:references:base_posts page_id:references:base_pages
+mix phx.gen.html Comp File files file:string name:string post_id:references:base_posts page_id:references:base_pages
 
 
 
